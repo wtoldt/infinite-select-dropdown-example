@@ -24,7 +24,7 @@
     //paths defined here will be resolved by vite thanks to vite-tsconfig-paths
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"]
