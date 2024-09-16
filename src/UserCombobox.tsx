@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { useDebounce } from 'use-debounce';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -9,7 +10,6 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandLoading,
 } from '@/components/ui/command';
 import {
   Popover,
@@ -23,6 +23,21 @@ type AbreviatedUser = Pick<User, 'id' | 'firstName' | 'lastName'>;
 type AbreviatedUserResponse = {
   users: AbreviatedUser[];
 } & ResponseMetadata;
+
+function UserItem({ user }: { user: AbreviatedUser }) {
+  return (
+    <>
+      <Avatar>
+        <AvatarImage
+          alt={`User icon for ${user.firstName} ${user.lastName}`}
+          src={`https://dummyjson.com/icon/${user.firstName}${user.lastName}/40`}
+        />
+        <AvatarFallback>{`${user.firstName[0]}${user.lastName[0]}`}</AvatarFallback>
+      </Avatar>
+      {`${user.firstName} ${user.lastName}`}
+    </>
+  );
+}
 
 export function UserCombobox() {
   const [open, setOpen] = React.useState(false);
@@ -65,15 +80,19 @@ export function UserCombobox() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[250px] justify-between"
         >
-          {selectedUser
-            ? selectedUser.firstName + ' ' + selectedUser.lastName
-            : 'Select User...'}
+          {selectedUser ? (
+            <div className="flex items-center gap-1">
+              <UserItem user={selectedUser} />
+            </div>
+          ) : (
+            'Select User...'
+          )}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[250px] p-0">
         <Command shouldFilter={false}>
           <CommandInput
             placeholder="Search Users..."
@@ -81,10 +100,9 @@ export function UserCombobox() {
             onValueChange={setSearch}
           />
           <CommandList>
-            <CommandEmpty>No User found.</CommandEmpty>
-            {status === 'loading' && (
-              <CommandLoading>Searching...</CommandLoading>
-            )}
+            <CommandEmpty>
+              {status === 'loading' ? 'Loading...' : 'No User found.'}
+            </CommandEmpty>
             <CommandGroup>
               {users.map((user) => (
                 <CommandItem
@@ -97,16 +115,17 @@ export function UserCombobox() {
                     );
                     setOpen(false);
                   }}
+                  className={cn('gap-1')}
                 >
                   <Check
                     className={cn(
-                      'mr-2 h-4 w-4',
+                      'h-4 w-4',
                       selectedUser?.id === user.id
                         ? 'opacity-100'
                         : 'opacity-0',
                     )}
                   />
-                  {user.firstName + ' ' + user.lastName}
+                  <UserItem user={user} />
                 </CommandItem>
               ))}
             </CommandGroup>
