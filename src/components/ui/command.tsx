@@ -2,7 +2,10 @@ import * as React from 'react';
 import { type DialogProps } from '@radix-ui/react-dialog';
 import { Command as CommandPrimitive } from 'cmdk';
 import { Search } from 'lucide-react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import {
+  Dialog as UiDialog,
+  DialogContent as UiDialogContent,
+} from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 
 type CommandProps = React.ComponentPropsWithoutRef<typeof CommandPrimitive>;
@@ -27,8 +30,8 @@ type CommandDialogProps = {} & DialogProps;
 
 const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
   return (
-    <Dialog {...props}>
-      <DialogContent className="overflow-hidden p-0 shadow-lg">
+    <UiDialog {...props}>
+      <UiDialogContent className="overflow-hidden p-0 shadow-lg">
         <Command
           className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium
             [&_[cmdk-group-heading]]:text-muted-foreground
@@ -39,8 +42,8 @@ const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
         >
           {children}
         </Command>
-      </DialogContent>
-    </Dialog>
+      </UiDialogContent>
+    </UiDialog>
   );
 };
 
@@ -189,6 +192,17 @@ const CommandShortcut = ({
 };
 CommandShortcut.displayName = 'CommandShortcut';
 
+const Root = Command;
+const Dialog = CommandDialog;
+const Input = CommandInput;
+const List = CommandList;
+const Empty = CommandEmpty;
+const Loading = CommandLoading;
+const Group = CommandGroup;
+const Item = CommandItem;
+const Shortcut = CommandShortcut;
+const Separator = CommandSeparator;
+
 export {
   Command,
   CommandDialog,
@@ -200,4 +214,15 @@ export {
   CommandItem,
   CommandShortcut,
   CommandSeparator,
+  //
+  Root,
+  Dialog,
+  Input,
+  List,
+  Empty,
+  Loading,
+  Group,
+  Item,
+  Shortcut,
+  Separator,
 };
