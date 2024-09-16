@@ -52,11 +52,13 @@ export function UserCombobox() {
 
   React.useEffect(() => {
     let staleRequest = false;
+    const abortController = new AbortController();
     const runEffect = async () => {
       setStatus('loading');
       setUsers([]);
       const response = await fetch(
         `https://dummyjson.com/users/search?q=${debouncedSearch}&limit=10&select=id,firstName,lastName`,
+        { signal: abortController.signal },
       );
       const data: AbreviatedUserResponse =
         (await response.json()) as AbreviatedUserResponse;
@@ -68,8 +70,10 @@ export function UserCombobox() {
     };
 
     void runEffect();
+
     return () => {
       staleRequest = true;
+      abortController.abort();
     };
   }, [debouncedSearch]);
 
