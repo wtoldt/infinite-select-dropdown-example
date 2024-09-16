@@ -97,6 +97,22 @@ const CommandEmpty = React.forwardRef<
 ));
 CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
 
+type CommandLoadingProps = React.ComponentPropsWithoutRef<
+  typeof CommandPrimitive.Loading
+>;
+
+const CommandLoading = React.forwardRef<
+  React.ElementRef<typeof CommandPrimitive.Loading>,
+  CommandLoadingProps
+>(({ className, ...props }: CommandLoadingProps, ref) => (
+  <CommandPrimitive.Loading
+    ref={ref}
+    className={cn('text-muted-foreground', className)}
+    {...props}
+  />
+));
+CommandLoading.displayName = CommandPrimitive.Loading.displayName;
+
 type CommandGroupProps = React.ComponentPropsWithoutRef<
   typeof CommandPrimitive.Group
 >;
@@ -179,6 +195,7 @@ export {
   CommandInput,
   CommandList,
   CommandEmpty,
+  CommandLoading,
   CommandGroup,
   CommandItem,
   CommandShortcut,
