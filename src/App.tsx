@@ -1,5 +1,5 @@
-import { ComboboxDemo } from './ComboboxDemo';
+import { UserCombobox } from './UserCombobox';
 
 export default function App() {
-  return <ComboboxDemo />;
+  return <UserCombobox />;
 }
