@@ -17,12 +17,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { type ResponseMetadata, type User } from '@/types';
-
-type AbreviatedUser = Pick<User, 'id' | 'firstName' | 'lastName'>;
-type AbreviatedUserResponse = {
-  users: AbreviatedUser[];
-} & ResponseMetadata;
+import { type AbreviatedUser, type AbreviatedUserResponse } from '@/types';
 
 function UserItem({ user }: { user: AbreviatedUser }) {
   return (

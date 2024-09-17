@@ -95,3 +95,8 @@ export type PostResponse = {
 export type UserResponse = {
   users: User[];
 } & ResponseMetadata;
+
+export type AbreviatedUser = Pick<User, 'id' | 'firstName' | 'lastName'>;
+export type AbreviatedUserResponse = {
+  users: AbreviatedUser[];
+} & ResponseMetadata;
