@@ -26,20 +26,20 @@ function UserItem({ user }: { user: AbreviatedUser }) {
   );
 }
 
-type UserCommandItemProps = {
+type UserListItemProps = {
   user: AbreviatedUser;
   setSelectedUser: React.Dispatch<React.SetStateAction<AbreviatedUser | null>>;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   selectedUser: AbreviatedUser | null;
   style: React.CSSProperties;
 };
-function UserCommandItem({
+function UserListItem({
   user,
   setSelectedUser,
   setOpen,
   selectedUser,
   style,
-}: UserCommandItemProps) {
+}: UserListItemProps) {
   const isSelected = selectedUser?.id === user.id;
   return (
     <div
@@ -68,7 +68,7 @@ function UserCommandItem({
   );
 }
 
-export function UserComboboxInfiniteScroll() {
+export function UserListInfiniteScroll() {
   const [open, setOpen] = React.useState(false);
   const [selectedUser, setSelectedUser] = React.useState<AbreviatedUser | null>(
     null,
@@ -105,7 +105,7 @@ export function UserComboboxInfiniteScroll() {
             }
 
             return (
-              <UserCommandItem
+              <UserListItem
                 user={user}
                 setSelectedUser={setSelectedUser}
                 setOpen={setOpen}

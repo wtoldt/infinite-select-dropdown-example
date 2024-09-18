@@ -1,5 +1,5 @@
 import { UserCombobox } from './UserCombobox';
-import { UserComboboxInfiniteScroll } from './UserComboboxInfiniteScroll';
+import { UserListInfiniteScroll } from './UserListInfiniteScroll';
 
 export default function App() {
   return (
@@ -10,8 +10,11 @@ export default function App() {
       {/* divider */}
       <div className="my-4 w-9/12 border-t" />
 
-      <p>With infinite scroll, no search</p>
-      <UserComboboxInfiniteScroll />
+      <p>
+        With infinite scroll, no search, not using Command component (just a
+        simple list)
+      </p>
+      <UserListInfiniteScroll />
     </div>
   );
 }
