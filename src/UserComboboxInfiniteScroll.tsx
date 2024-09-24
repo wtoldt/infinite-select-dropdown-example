@@ -92,8 +92,32 @@ export function UserComboboxInfiniteScroll() {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[250px] p-0">
+      <PopoverContent
+        className="w-[250px] p-0"
+        onOpenAutoFocus={(e) => {
+          const SELECTOR = '[cmdk-root]';
+          if (e.target instanceof HTMLElement) {
+            const focusTarget = e.target.querySelector(SELECTOR);
+            if (focusTarget instanceof HTMLElement) {
+              focusTarget.focus();
+            } else {
+              console.log(
+                'focusTarget is not an instance of HTMLElement',
+                focusTarget,
+              );
+            }
+          } else {
+            console.log('not an element', e.target);
+          }
+        }}
+      >
         <Command shouldFilter={false}>
+          {/* <input
+            type="text"
+            className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none
+              placeholder:text-muted-foreground disabled:cursor-not-allowed
+              disabled:opacity-50"
+          /> */}
           <CommandList>
             <UserInfiniteScroll
               fixedSizeListMeasurements={{
