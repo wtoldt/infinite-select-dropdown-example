@@ -192,6 +192,7 @@ const getId = (() => {
   let i = 0;
   return () => `${i++}`;
 })();
+//@ts-ignore
 const useIdCompatibility = () => {
   React.useState(getId);
   const [id] = React.useState(getId);
